@@ -1,0 +1,21 @@
+[Unit]
+Description=Zookeeper Service 
+Documentation=http://zookeeper.apache.org
+Requires=network.target
+Wants=syslog.target
+
+
+[Service]
+Environment=ZOO_LOG_DIR=/var/zookeeper/logs
+Type=forking
+ExecStart=/usr/local/zookeeper/bin/zkServer.sh start /usr/local/zookeeper/conf/zoo.cfg
+ExecStop=/usr/local/zookeeper/bin/zkServer.sh stop 
+ExecReload=/usr/local/zookeeper/bin/zkServer.sh restart /usr/local/zookeeper/conf/zoo.cfg
+WorkingDirectory=/var/zookeeper
+User=zookeeper
+Group=zookeeper
+TimeoutSec=30
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
