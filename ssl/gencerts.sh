@@ -61,7 +61,7 @@ keytool -keystore kafka.client.keystore.jks -certreq -file client-sign-request -
 openssl x509 -req -CA server-cert -CAkey server-key -in client-sign-request -out client-signed -days $VALID_DAYS -CAcreateserial -passin pass:$SRVPASS
 
 # import the signed cert into the client keystore 
-keytool -keystore kafka.client.keystore.jks -alias $SVR_COMMON_NAME -import -file server-cert -storepass $CLIPASS -keypass $CLIPASS -noprompt -keyalg RSA
+keytool -keystore kafka.client.keystore.jks -alias $SRV_COMMON_NAME -import -file server-cert -storepass $CLIPASS -keypass $CLIPASS -noprompt -keyalg RSA
 
 # import the client's signed certificate
 keytool -keystore kafka.client.keystore.jks -import -file client-signed -alias $CLI_COMMON_NAME -storepass $CLIPASS -keypass $CLIPASS -noprompt -keyalg RSA
